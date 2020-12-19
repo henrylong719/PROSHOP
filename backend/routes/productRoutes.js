@@ -13,6 +13,7 @@ router.get(
   asyncHandler(async (req, res) => {
     // pass {} return anything
     const products = await Product.find({});
+
     res.json(products);
   })
 );
