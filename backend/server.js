@@ -3,12 +3,16 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 //  require and configure dotenv.
 dotenv.config();
 
 const app = express();
+
+// for parsing body information in the incoming POST request
+app.use(express.json());
 
 // connect database
 connectDB();
@@ -22,6 +26,9 @@ app.get('/', (req, res) => {
 
 // anything goes to /api/products, linking to productRoutes
 app.use('/api/products', productRoutes);
+
+// anything goes to /api/users, linking to userRoutes
+app.use('/api/users', userRoutes);
 
 // middleware to handle not found URL (./middleware/errorMiddleware.js)
 app.use(notFound);
