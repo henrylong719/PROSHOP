@@ -23,6 +23,7 @@ const RegisterScreen = ({ location, history }) => {
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
+      // history.push('/');
     }
   }, [history, userInfo, redirect]);
 
@@ -78,7 +79,7 @@ const RegisterScreen = ({ location, history }) => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Confirm Password password"
+            placeholder="ConfirmPassword password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
@@ -92,9 +93,8 @@ const RegisterScreen = ({ location, history }) => {
       <Row className="py-3">
         <Col>
           Have an Account?{' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-            Login
-          </Link>
+          {/* <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}> */}
+          <Link to={'/login'}>Login</Link>
         </Col>
       </Row>
     </FormContainer>

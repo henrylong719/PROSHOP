@@ -19,7 +19,9 @@ const LoginScreen = ({ location, history }) => {
 
   useEffect(() => {
     if (userInfo) {
+      // for this  history.push('/login?redirect=shipping'); in cartScreen.js
       history.push(redirect);
+      // history.push('/');
     }
   }, [history, userInfo, redirect]);
 
@@ -62,8 +64,9 @@ const LoginScreen = ({ location, history }) => {
 
       <Row className="py-3">
         <Col>
-          New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+          New Customer?
+          <Link to={'/register'}>
+            {/* <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}> */}
             Register
           </Link>
         </Col>

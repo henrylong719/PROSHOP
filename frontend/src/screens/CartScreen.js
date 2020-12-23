@@ -14,6 +14,8 @@ const CartScreen = ({ match, location, history }) => {
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
   //   const qty = location.search;   console.log(qty); //?qty=1
 
+  // console.log(location.search);
+
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);

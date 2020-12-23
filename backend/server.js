@@ -34,6 +34,12 @@ app.use('/api/users', userRoutes);
 // anything goes to /api/order, linking to orderRoutes
 app.use('/api/orders', orderRoutes);
 
+// for getting PayPal client id (when we are ready for payment, we fetch the route and get the id)
+
+app.get('/api/config/paypal', (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 // middleware to handle not found URL (./middleware/errorMiddleware.js)
 app.use(notFound);
 

@@ -34,7 +34,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 
 // .pre('save')  want this happen pre save
 userSchema.pre('save', async function (next) {
-  // if the user just updating email or name info, then just go next(), no need to hash the password again
+  // if the user only updates email or name info, then just go next(), no need to hash the password again
   if (!this.isModified('password')) {
     next();
   }

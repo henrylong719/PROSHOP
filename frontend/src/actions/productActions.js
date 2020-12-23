@@ -9,6 +9,9 @@ import {
 } from '../constants/productConstants';
 
 // thunk allows us to add a function within a function
+// Redux Thunk middleware allows you to write action creators that return a function instead of an action.
+// why use multiple functions here
+// 1. for representing async
 export const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });

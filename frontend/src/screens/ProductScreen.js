@@ -16,7 +16,7 @@ import Message from '../components/Message';
 
 import Rating from '../components/Rating';
 
-// props.match
+// use props.match to get the id in the params
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
 

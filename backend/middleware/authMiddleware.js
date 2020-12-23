@@ -8,6 +8,8 @@ const protect = asyncHandler(async (req, res, next) => {
 
   let token;
 
+  // The HTTP Authorization request header contains the credentials to authenticate a user agent with a server.
+
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')

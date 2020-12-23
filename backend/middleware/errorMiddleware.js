@@ -9,6 +9,8 @@ const notFound = (req, res, next) => {
 };
 
 const errorHandler = (err, req, res, next) => {
+  // Status code 200 stands for OK, which does not make sense when an exception happens
+  // Therefore, it should be changed to status code 500, which stands for Internal Server Error
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.status(statusCode);
 

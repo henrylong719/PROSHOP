@@ -6,7 +6,6 @@ import {
   CART_SAVE_PAYMENT_METHOD,
 } from '../constants/cartConstants';
 
-// getState get all current state
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/products/${id}`);
 
@@ -24,6 +23,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
 
   // save the cartItem into the localStorage
   // in the store.js grab it and put it into initialState
+  // getState get all current state
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
 };
 
