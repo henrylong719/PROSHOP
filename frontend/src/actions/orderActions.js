@@ -11,6 +11,7 @@ import {
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_FAIL,
   ORDER_LIST_MY_SUCCESS,
+  ORDER_CREATE_RESET,
 } from '../constants/orderConstants';
 import axios from 'axios';
 
@@ -75,6 +76,11 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
       payload: data,
+    });
+
+    // remove the orders in the state of orderCreate
+    dispatch({
+      type: ORDER_CREATE_RESET,
     });
   } catch (error) {
     dispatch({
