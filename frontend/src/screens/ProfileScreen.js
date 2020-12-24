@@ -35,12 +35,13 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push('./login');
     } else {
+      dispatch(listMyOrders());
       // if not name, then fill in the form
       if (!user.name) {
         // check the getUserDetails in userAction.js, instead of passing an id, passing the string profile as the url
         dispatch(getUserDetails('profile'));
 
-        dispatch(listMyOrders());
+        // dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
