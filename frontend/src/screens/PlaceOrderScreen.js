@@ -33,21 +33,16 @@ const PlaceOrderScreen = ({ history }) => {
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
 
-  const orderDetails = useSelector((state) => state.orderDetails);
-  const { order: preOrder } = orderDetails;
-
+  // const orderDetails = useSelector((state) => state.orderDetails);
+  // const { order: preOrder } = orderDetails;
   // problem: it is already success before dispatch createOrder
-  console.log(success);
-
-  console.log('preOrder', preOrder);
-
-  console.log('order', order);
+  // console.log(success);
+  // console.log('preOrder', preOrder);
+  // console.log('order', order);
 
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
-
-      // console.log(order._id);
     }
     // eslint-disable-next-line
   }, [history, success]);

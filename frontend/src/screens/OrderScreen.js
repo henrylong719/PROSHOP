@@ -49,7 +49,7 @@ const OrderScreen = ({ match }) => {
       document.body.appendChild(script);
     };
 
-    console.log(orderId);
+    // console.log(orderId);
 
     // infinite loop here
     if (successPay || !order || order._id !== orderId) {

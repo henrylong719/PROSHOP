@@ -34,7 +34,7 @@ export const createdOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    console.log('orderAction', order);
+    // console.log('orderAction', order);
 
     const { data } = await axios.post(`/api/orders`, order, config);
 
@@ -46,7 +46,7 @@ export const createdOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_CREATE_FAIL,
       payload:
-        error.message && error.response.data.message
+        error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     });
@@ -86,7 +86,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_DETAILS_FAIL,
       payload:
-        error.message && error.response.data.message
+        error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     });
@@ -129,7 +129,7 @@ export const payOrder = (orderId, paymentResult) => async (
     dispatch({
       type: ORDER_PAY_FAIL,
       payload:
-        error.message && error.response.data.message
+        error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     });
@@ -164,7 +164,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     dispatch({
       type: ORDER_LIST_MY_FAIL,
       payload:
-        error.message && error.response.data.message
+        error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     });
