@@ -57,10 +57,25 @@ const updateUserProfile =
   // for handling exceptions inside of async express routes and passing them to your express error handlers.
   asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
+
+    // console.log(user);
+    // {
+    //   [0]   isAdmin: false,
+    //   [0]   _id: 5fdfec267c4c6d6cba849e2c,
+    //   [0]   name: 'qilong',
+    //   [0]   email: 'henrylong719@gmail.com',
+    //   [0]   password: '$2a$10$gVlAbkT1n0bc8BNGHyg4guclrrNAbWoysR/xfCAthkAdjm.Kb2EqC',
+    //   [0]   createdAt: 2020-12-21T00:28:22.331Z,
+    //   [0]   updatedAt: 2020-12-21T02:40:45.760Z,
+    //   [0]   __v: 0
+    //   [0]
+    // }
+
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
 
+      // the password in the database is already hashed
       if (req.body.password) {
         user.password = req.body.password;
       }

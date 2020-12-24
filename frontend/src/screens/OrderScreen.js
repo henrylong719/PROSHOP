@@ -49,6 +49,8 @@ const OrderScreen = ({ match }) => {
       document.body.appendChild(script);
     };
 
+    console.log(orderId);
+
     // infinite loop here
     if (successPay || !order || order._id !== orderId) {
       // prevent infinite loop
@@ -95,8 +97,9 @@ const OrderScreen = ({ match }) => {
 
               <p>
                 <strong> Address: </strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city},
-                {order.shippingAddress.postCode},{order.shippingAddress.country}
+                {order.shippingAddress.address}, {order.shippingAddress.city},{' '}
+                {order.shippingAddress.postalCode},{' '}
+                {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
                 <Message variant="success">Paid on {order.deliveredAt}</Message>

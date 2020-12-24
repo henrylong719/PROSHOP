@@ -18,7 +18,7 @@ import {
 } from '../constants/userConstants';
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
-import { CART_REMOVE_ITEM, CART_RESET_ITEM } from '../constants/cartConstants';
+import { CART_RESET_ITEM } from '../constants/cartConstants';
 
 // for user login
 export const login = (email, password) => async (dispatch) => {
@@ -82,7 +82,7 @@ export const register = (name, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      './api/users',
+      '/api/users',
       { name, email, password },
       config
     );
@@ -109,6 +109,7 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 };
 
+// getUserDetails('profile')
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -119,8 +120,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       userLogin: { userInfo },
     } = getState();
 
-    // console.log(userInfo.token);
-
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -128,8 +127,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    // should be put
-    const { data } = await axios.get(`./api/users/${id}`, config);
+    const { data } = await axios.get(`/api/users/${id}`, config);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -166,7 +164,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     };
 
     // should be put
-    const { data } = await axios.put(`./api/users/profile`, user, config);
+    const { data } = await axios.put(`/api/users/profile`, user, config);
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,

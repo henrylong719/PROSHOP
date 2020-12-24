@@ -44,6 +44,7 @@ const LoginScreen = ({ location, history }) => {
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
 
@@ -54,6 +55,7 @@ const LoginScreen = ({ location, history }) => {
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           ></Form.Control>
         </Form.Group>
 
@@ -66,6 +68,7 @@ const LoginScreen = ({ location, history }) => {
         <Col>
           New Customer?
           <Link to={'/register'}>
+            {' '}
             {/* <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}> */}
             Register
           </Link>

@@ -33,6 +33,8 @@ export const createdOrder = (order) => async (dispatch, getState) => {
       },
     };
 
+    console.log('orderAction', order);
+
     const { data } = await axios.post(`/api/orders`, order, config);
 
     dispatch({
