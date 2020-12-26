@@ -82,7 +82,7 @@ const orderSchema = mongoose.Schema(
       default: false,
     },
 
-    deliverAt: {
+    deliveredAt: {
       type: Date,
     },
   },

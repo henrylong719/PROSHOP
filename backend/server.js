@@ -1,11 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import path from 'path';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 //  require and configure dotenv.
 dotenv.config();
@@ -33,6 +35,16 @@ app.use('/api/users', userRoutes);
 
 // anything goes to /api/order, linking to orderRoutes
 app.use('/api/orders', orderRoutes);
+
+// anything goes to /api/upload, linking to uploadRoutes
+app.use('/api/upload', uploadRoutes);
+
+// upload folder is not accessed by browser by default (need to make it static)
+
+// __dirname points to current folder (however only available in the commonjs)
+// in ES6 we need to use path.resolve() to mimic it
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 // for getting PayPal client id (when we are ready for payment, we fetch the route and get the id)
 

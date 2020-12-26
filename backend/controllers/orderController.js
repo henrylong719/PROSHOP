@@ -90,6 +90,30 @@ const updateOrderToPaid =
     }
   });
 
+// $desc   Update order to paid
+// $route    GET /api/orders/:id/pay
+// $access   Private
+
+const updateOrderToDelivered =
+  // for handling exceptions inside of async express routes and passing them to your express error handlers.
+  asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+
+      console.log(order.deliveredAt);
+
+      const updateOrder = await order.save();
+
+      res.json(updateOrder);
+    } else {
+      res.status(404);
+      throw new Error('Order not found');
+    }
+  });
+
 // $desc   Get logged in user orders
 // $route    GET /api/orders/myorders
 // $access   Private
@@ -101,4 +125,22 @@ const getMyOrders =
     res.json(orders);
   });
 
-export { addOrderItems, getOrderById, updateOrderToPaid, getMyOrders };
+// $desc   Get logged in user orders
+// $route    GET /api/orders/myorders
+// $access   Private
+
+const getOrders =
+  // for handling exceptions inside of async express routes and passing them to your express error handlers.
+  asyncHandler(async (req, res) => {
+    const orders = await Order.find({}).populate('user', 'id name');
+    res.json(orders);
+  });
+
+export {
+  addOrderItems,
+  getOrderById,
+  updateOrderToPaid,
+  updateOrderToDelivered,
+  getMyOrders,
+  getOrders,
+};
