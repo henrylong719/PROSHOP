@@ -83,7 +83,7 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [order, orderId, dispatch, successPay, successDeliver]);
+  }, [order, orderId, dispatch, successPay, successDeliver, history, userInfo]);
 
   // paymentResult from paypal
   const successPaymentHandler = (paymentResult) => {

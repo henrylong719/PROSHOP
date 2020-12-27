@@ -8,6 +8,10 @@ import asyncHandler from 'express-async-handler';
 const getProducts =
   // for handling exceptions inside of async express routes and passing them to your express error handlers.
   asyncHandler(async (req, res) => {
+    // for pagination
+    const pageSize = 10;
+    const page = Number(req.query.pageNumber) || 1;
+
     // req.query: get query string  e.g.  /api/products?keyword=${keyword}
     const keyword = req.query.keyword
       ? {
@@ -20,10 +24,17 @@ const getProducts =
         }
       : {};
 
-    // pass {} return anything
-    const products = await Product.find({ ...keyword });
+    // count the total number of product
+    const count = await Product.countDocuments({ ...keyword });
 
-    res.json(products);
+    // pass {} return anything
+    const products = await Product.find({ ...keyword })
+      // limit number of products showing on the page
+      .limit(pageSize)
+      // for the pages > 1
+      .skip(pageSize * (page - 1));
+
+    res.json({ products, page, pages: Math.ceil(count / pageSize) });
   });
 
 // $desc     Fetch single product
