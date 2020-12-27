@@ -8,8 +8,20 @@ import asyncHandler from 'express-async-handler';
 const getProducts =
   // for handling exceptions inside of async express routes and passing them to your express error handlers.
   asyncHandler(async (req, res) => {
+    // req.query: get query string  e.g.  /api/products?keyword=${keyword}
+    const keyword = req.query.keyword
+      ? {
+          // use regex to do vague search e.g. ip == iphone
+          name: {
+            $regex: req.query.keyword,
+            // case insensitive
+            $options: 'i',
+          },
+        }
+      : {};
+
     // pass {} return anything
-    const products = await Product.find({});
+    const products = await Product.find({ ...keyword });
 
     res.json(products);
   });
