@@ -1,10 +1,18 @@
 import mongoose from 'mongoose';
 
+// associated user with a review, aside from just a name, so we can check if the user already leave or review or not
 const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     rating: { type: Number, required: true },
     comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      require: true,
+      // reference specific model for this ObjectId
+      // use ref to add relationship between review and user
+      ref: 'User',
+    },
   },
   {
     timestamps: true,

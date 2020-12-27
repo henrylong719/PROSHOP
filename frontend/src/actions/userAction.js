@@ -29,6 +29,7 @@ import {
 
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
 import { CART_RESET_ITEM } from '../constants/cartConstants';
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 
 // for user login
 export const login = (email, password) => async (dispatch) => {
@@ -76,6 +77,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
   dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
   // dispatch({ type: USER_REGISTER_RESET });
   // dispatch({ type: CART_RESET_ITEM });
 };
