@@ -10,9 +10,10 @@ const getProducts =
   asyncHandler(async (req, res) => {
     // for pagination
     const pageSize = 10;
+
+    // req.query: get query string  e.g.  /api/products?pagenumber=1
     const page = Number(req.query.pageNumber) || 1;
 
-    // req.query: get query string  e.g.  /api/products?keyword=${keyword}
     const keyword = req.query.keyword
       ? {
           // use regex to do vague search e.g. ip == iphone
@@ -172,6 +173,18 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 });
 
+// $desc     Get top rated products
+// $route    POST /api/products/top
+// $access   Public
+
+const getTopProducts = asyncHandler(async (req, res) => {
+  // ascending order (rating: -1)
+
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(products);
+});
+
 export {
   getProducts,
   getProductById,
@@ -179,4 +192,5 @@ export {
   createProduct,
   updateProduct,
   createProductReview,
+  getTopProducts,
 };

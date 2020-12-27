@@ -70,16 +70,16 @@ export const login = (email, password) => async (dispatch) => {
 // for user logout
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
-  // localStorage.removeItem('cartItems');
-  // localStorage.removeItem('shippingAddress');
-  // localStorage.removeItem('paymentMethod');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  localStorage.removeItem('paymentMethod');
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
   dispatch({ type: USER_LIST_RESET });
   dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-  // dispatch({ type: USER_REGISTER_RESET });
-  // dispatch({ type: CART_RESET_ITEM });
+  dispatch({ type: USER_REGISTER_RESET });
+  dispatch({ type: CART_RESET_ITEM });
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -181,6 +181,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
     });
+
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+
+    localStorage.setItem('UserInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,

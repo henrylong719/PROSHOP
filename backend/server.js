@@ -29,10 +29,6 @@ connectDB();
 // middleware is a function that has access to the req res cycle in the route (app.use())
 // next() (move to next piece of middleware)
 
-app.get('/', (req, res) => {
-  res.send('API is running....');
-});
-
 // anything goes to /api/products, linking to productRoutes
 app.use('/api/products', productRoutes);
 
@@ -45,6 +41,12 @@ app.use('/api/orders', orderRoutes);
 // anything goes to /api/upload, linking to uploadRoutes
 app.use('/api/upload', uploadRoutes);
 
+// for getting PayPal client id (when we are ready for payment, we fetch the route and get the id)
+
+app.get('/api/config/paypal', (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 // upload folder is not accessed by browser by default (need to make it static)
 
 // __dirname points to current folder (however only available in the commonjs)
@@ -52,11 +54,18 @@ app.use('/api/upload', uploadRoutes);
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
-// for getting PayPal client id (when we are ready for payment, we fetch the route and get the id)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-app.get('/api/config/paypal', (req, res) =>
-  res.send(process.env.PAYPAL_CLIENT_ID)
-);
+  // app.get('*')  get any route that is not our api
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....');
+  });
+}
 
 // middleware to handle not found URL (./middleware/errorMiddleware.js)
 app.use(notFound);

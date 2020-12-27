@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userAction';
 import { listMyOrders } from '../actions/orderActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -35,11 +36,13 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push('./login');
     } else {
-      dispatch(listMyOrders());
       // if not name, then fill in the form
-      if (!user.name) {
+      if (!user.name || !user || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
+
         // check the getUserDetails in userAction.js, instead of passing an id, passing the string profile as the url
         dispatch(getUserDetails('profile'));
+        dispatch(listMyOrders());
 
         // dispatch(listMyOrders());
       } else {
@@ -47,7 +50,7 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [dispatch, history, userInfo, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
