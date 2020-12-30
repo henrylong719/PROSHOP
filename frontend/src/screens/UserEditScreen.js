@@ -28,9 +28,9 @@ const UserEditScreen = ({ match, history }) => {
 
   //   console.log(userId);
 
-  console.log('userDetails', userDetails);
+  // console.log('userDetails', userDetails);
 
-  console.log('user', user);
+  // console.log('user', user);
 
   useEffect(() => {
     if (successUpdate) {
@@ -43,6 +43,7 @@ const UserEditScreen = ({ match, history }) => {
       } else {
         setName(user.name);
         setEmail(user.email);
+
         setIsAdmin(user.isAdmin);
       }
     }
@@ -50,7 +51,7 @@ const UserEditScreen = ({ match, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
+    // console.log(user.isAdmin);
     dispatch(updateUser({ _id: userId, name, email, isAdmin }));
   };
 

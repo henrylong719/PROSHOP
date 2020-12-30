@@ -198,6 +198,8 @@ const updateUser =
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+
+      // problem
       user.isAdmin = req.body.isAdmin;
 
       const updatedUser = await user.save();

@@ -103,7 +103,7 @@ const updateOrderToDelivered =
       order.isDelivered = true;
       order.deliveredAt = Date.now();
 
-      console.log(order.deliveredAt);
+      // console.log(order.deliveredAt);
 
       const updateOrder = await order.save();
 
@@ -126,7 +126,7 @@ const getMyOrders =
   });
 
 // $desc   Get logged in user orders
-// $route    GET /api/orders/myorders
+// $route    GET /api/orders
 // $access   Private
 
 const getOrders =

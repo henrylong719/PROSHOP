@@ -19,6 +19,15 @@ h2 {
 .rating span {
   margin: 0.1rem;
 }
+
+.searchForm {
+  height: calc(1.2em + 1.5rem + 0px) !important;
+}
+
+.searchBtn {
+  color: #55595c !important;
+}
+
 /* carousel */
 .carousel-item-next,
 .carousel-item-prev,

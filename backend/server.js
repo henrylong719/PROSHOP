@@ -47,7 +47,7 @@ app.get('/api/config/paypal', (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 );
 
-// upload folder is not accessed by browser by default (need to make it static)
+// uploads folder is not accessed by browser by default (need to make it static)
 
 // __dirname points to current folder (however only available in the commonjs)
 // in ES6 we need to use path.resolve() to mimic it

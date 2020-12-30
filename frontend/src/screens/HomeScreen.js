@@ -37,9 +37,7 @@ const HomeScreen = ({ match }) => {
         </Link>
       )}
 
-      <h1>
-        John your information is already recorded please call Henry to delete it{' '}
-      </h1>
+      <h1>Latest Products</h1>
 
       {loading ? (
         <Loader />
